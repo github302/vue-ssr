@@ -18,6 +18,7 @@ export default {
     },
     components: {
        'goods-detail': (resolve) => {
+           console.log("goods-detail");
            if (typeof window !== 'undefined') {
                if (window.isvScript) {
                     console.log("window.isvScript ", window.isvScript);
@@ -30,7 +31,7 @@ export default {
            } else {
                resolve({
                    render: h => h('div')
-            
+               });
            }
         }
     },
