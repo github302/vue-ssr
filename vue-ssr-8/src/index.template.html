@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+</head>
+<body>
+    <!--vue-ssr-outlet-->
+    <script>
+        function scriptReady() {
+            console.log('scriptReady 加载成功！')
+            initGlobal();
+        }
+        function onreadystatechange() {
+            if(this.readyState === 'loaded' || this.readyState === 'complete') {
+                console.log('onreadystatechange 加载成功！');
+                initGlobal();
+            }
+        }
+        function initGlobal() {
+            console.log("initGlobal");
+            console.log(window.mallCloud);
+        }
+    </script>
+    <script src="<!--isv-script-->" onload="scriptReady" onreadystatechange="onreadystatechange"></script>
+</body>
+</html>

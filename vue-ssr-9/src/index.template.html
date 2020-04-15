@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+</head>
+<body>
+    <!--vue-ssr-outlet-->
+    <script>
+        function LoadEvent () {
+            this.listeners = {};
+            this.on = function (eventName, callback) {
+            if (this.listeners[eventName] === undefined) {
+                this.listeners[eventName] = [];
+            }
+                this.listeners[eventName].push(callback);
+            };
+            this.emit = function (eventName) {
+                this.listeners[eventName] && this.listeners[eventName].forEach(callback => callback());
+            };
+        }
+
+        function initGlobal(data) {
+            console.log("initGlobal", data);
+            loadScript(data.isvScript).then(() => {
+                console.log(window.mallCloud);
+                if (!window['$loadEvent']) {
+                    window['$loadEvent'] = new LoadEvent();  
+                }
+                window['$loadEvent'].emit('scriptLoaded');
+            })
+        }
+
+        function loadScript(url) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.onload = script.onreadystatechange = function() {
+                    if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                        console.log("script 加载完成");
+                        resolve();
+                        script.onload = script.onreadystatechange = null;
+                    }
+                };
+                script.setAttribute('src', url);
+                document.body.appendChild(script);
+            })
+            
+        }
+    </script>
+    <!--isv-script-->
+</body>
+</html>
