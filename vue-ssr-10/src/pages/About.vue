@@ -30,7 +30,7 @@ export default {
            } else {
                resolve({
                    render: h => h('div')
-               });
+            
            }
         }
     },
