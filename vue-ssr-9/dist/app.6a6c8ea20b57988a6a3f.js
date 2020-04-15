@@ -74,12 +74,16 @@ webpackJsonp([0],[
     },
 
     mounted() {
-        if (!window['$loadEvent']) {
-            window['$loadEvent'] = new LoadEvent();
-        }
-        window['$loadEvent'].on("scriptLoaded", () => {
+        if (window.mallCloud) {
             this.components = window.mallCloud.components.goodsDetail__v2shuai || __WEBPACK_IMPORTED_MODULE_0__Default_vue__["a" /* default */];
-        });
+        } else {
+            if (!window['$loadEvent']) {
+                window['$loadEvent'] = new LoadEvent();
+            }
+            window['$loadEvent'].on("scriptLoaded", () => {
+                this.components = window.mallCloud.components.goodsDetail__v2shuai || __WEBPACK_IMPORTED_MODULE_0__Default_vue__["a" /* default */];
+            });
+        }
         console.log("About mount");
     }
 });
@@ -99,7 +103,7 @@ if (window.__INITIAL_STATE__) {
 }
 const designPages = ['/about'];
 
-function loadScript() {
+function loadScript(scriptSrc) {
     return new Promise(resolve => {
         const script = document.createElement('script');
         script.onload = script.onreadystatechange = function () {
@@ -109,14 +113,14 @@ function loadScript() {
                 script.onload = script.onreadystatechange = null;
             }
         };
-        script.setAttribute('src', 'http://localhost:3001/api/init.jsonp?callback=initGlobal');
+        script.setAttribute('src', scriptSrc);
         document.body.appendChild(script);
     });
 }
 
 function loadIsvScript(to) {
     if (designPages.some(page => page === to.path) && !window.mallCloud) {
-        return loadScript();
+        return loadScript('http://localhost:3001/api/init.jsonp?callback=initGlobal');
     }
     return Promise.resolve();
 }
@@ -137,6 +141,10 @@ router.beforeEach((to, from, next) => {
     }).catch(e => {
         next();
     });
+});
+
+router.afterEach((route, from) => {
+    console.log('client afterEach ', route.path);
 });
 app.$mount("#app");
 
@@ -561,4 +569,4 @@ if (false) {
 
 /***/ })
 ],[5]);
-//# sourceMappingURL=app.b6c54cec86717c87f2d5.js.map
+//# sourceMappingURL=app.6a6c8ea20b57988a6a3f.js.map

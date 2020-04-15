@@ -33,12 +33,16 @@ export default {
     },
     
     mounted() {
-        if (!window['$loadEvent']) {
-            window['$loadEvent'] = new LoadEvent();    
-        }
-        window['$loadEvent'].on("scriptLoaded", () => {
+        if (window.mallCloud) {
             this.components = window.mallCloud.components.goodsDetail__v2shuai || DefaultComp;
-        })
+        } else {
+            if (!window['$loadEvent']) {
+                window['$loadEvent'] = new LoadEvent();    
+            }
+            window['$loadEvent'].on("scriptLoaded", () => {
+                this.components = window.mallCloud.components.goodsDetail__v2shuai || DefaultComp;
+            })
+        }
         console.log("About mount");
     }
 }
