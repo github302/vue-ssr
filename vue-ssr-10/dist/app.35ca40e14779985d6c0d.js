@@ -60,6 +60,7 @@ webpackJsonp([0],[
     },
     components: {
         'goods-detail': resolve => {
+            console.log("goods-detail");
             if (typeof window !== 'undefined') {
                 if (window.isvScript) {
                     console.log("window.isvScript ", window.isvScript);
@@ -112,8 +113,13 @@ const { app, store, router } = Object(__WEBPACK_IMPORTED_MODULE_0__app__["a" /* 
 if (window.__INITIAL_STATE__) {
     store.replaceState(window.__INITIAL_STATE__);
 }
+const designPages = ['/about'];
+
 router.beforeEach((to, from, next) => {
     console.log("client beforeEach", to.path);
+    if (designPages.some(page => page === to.path)) {
+        window.isvScript = "http://localhost:3000/static/js/goods-detail__v2.495932d1.js";
+    }
     const matchedComponents = router.getMatchedComponents(to);
     Promise.all(matchedComponents.map(component => {
         if (component.preFetch) {
@@ -591,4 +597,4 @@ if (false) {
 
 /***/ })
 ],[5]);
-//# sourceMappingURL=app.281b9433fd87e10696e0.js.map
+//# sourceMappingURL=app.35ca40e14779985d6c0d.js.map
