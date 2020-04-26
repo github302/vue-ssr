@@ -9,19 +9,7 @@
     <script>
         var _global = JSON.parse('<%- data %>');
         console.log(_global);       
-        loadScript(_global.isvScript);
-        function loadScript(src) {
-            var script = document.createElement("script");
-            script.onload = script.onreadystatechange = function() {
-                if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
-                    console.log("script loaded");
-                    script.onload = script.onreadystatechange = null;
-                }
-            }
-            script.setAttribute('src', src);
-            document.body.appendChild(script);
-        }
     </script>
     <div id="app"></div>
-<script type="text/javascript" src="/dist/isv.d0e271acc275634a1d9e.js"></script></body>
+<script type="text/javascript" src="/dist/isv.34fac86bae23404ac3a4.js"></script></body>
 </html>

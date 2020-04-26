@@ -9,18 +9,6 @@
     <script>
         var _global = JSON.parse('<%- data %>');
         console.log(_global);       
-        loadScript(_global.isvScript);
-        function loadScript(src) {
-            var script = document.createElement("script");
-            script.onload = script.onreadystatechange = function() {
-                if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
-                    console.log("script loaded");
-                    script.onload = script.onreadystatechange = null;
-                }
-            }
-            script.setAttribute('src', src);
-            document.body.appendChild(script);
-        }
     </script>
     <div id="app"></div>
 </body>

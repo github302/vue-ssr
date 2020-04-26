@@ -11,16 +11,5 @@ export default {
             msg: ''
         }
     },
-    components: {
-        'isv-comp': (resolve) => {
-            if (window.mallCloud) {
-                resolve(window.mallCloud.components.goodsDetail__v2shuai);
-            } else {
-                resolve({
-                    render: h => h('div')
-                })
-            }
-        }
-    }
 }
 </script>
