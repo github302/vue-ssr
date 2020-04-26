@@ -3,6 +3,8 @@
         <p>About page</p>
         <p>Counter: {{ counter }}</p>
         <p><button @click="$store.commit('INCREMENT')">+</button></p>
+        <!-- <h1 class="ssr" v-if="ssr" :style="{ color: 'red'}">1111</h1> -->
+        <!-- <h2 class="csr" v-else :style="{ color: 'blue'}">2222</h2> -->
         <goods-detail />
         <router-link to="/">Home page</router-link>
     </div>
@@ -36,7 +38,9 @@ export default {
         }
     },
     data() {
+        console.log("about data");
         return {
+            ssr: typeof window === 'undefined' ? true: false,
             msg: '',
             components: DefaultComp,
         }

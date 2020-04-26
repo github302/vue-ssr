@@ -2,6 +2,7 @@ import { createApp } from './app';
 
 const { app, store, router} = createApp();
 if (window.__INITIAL_STATE__) {
+    console.log("client init_state");
     store.replaceState(window.__INITIAL_STATE__);
 }
 const designPages = ['/about'];
